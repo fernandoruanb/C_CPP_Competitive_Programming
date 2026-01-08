@@ -3,6 +3,14 @@
 #include <stdbool.h>
 #include <unistd.h>
 
+/*
+        Author: Fernando Ruan
+        Profile: https://codeforces.com/profile/fruan-ba
+        Country: Brazil
+        ChallengeLink: https://codeforces.com/problemset/problem/58/A
+        I am happy to code :)
+*/
+
 // my number_conversor is based in the atoi function, but I improved it. You can check it using man atoi in the shell
 
 static int number_conversor(const char *str, bool *err) {
