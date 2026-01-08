@@ -18,7 +18,7 @@ static int number_conversor(const char *str, bool *err) {
 	int signal = 1;
 
 	while (*str == '\n' || *str == '\f' || *str == '\a' || *str == '\b'
-		|| *str == '\v' || *str == '\r')
+		|| *str == ' ' || *str == '\t' || *str == '\v' || *str == '\r')
 			++str;
 	while (*str == '+' || *str == '-') {
 		if (*str == '-')
