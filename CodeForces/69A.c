@@ -7,7 +7,7 @@
         Author: Fernando Ruan
         Profile: https://codeforces.com/profile/fruan-ba
         Country: Brazil
-        ChallengeLink: https://codeforces.com/problemset/problem/58/A
+        ChallengeLink: https://codeforces.com/problemset/problem/69/A
         I am happy to code :)
 */
 
@@ -22,7 +22,7 @@ static int number_conversor(const char *str, bool *err) {
 			++str;
 	while (*str == '+' || *str == '-') {
 		if (*str == '-')
-			signal = -1;
+			signal *= -1; // creating the special effect -(-10) = 10
 		++str;
 	}
 	while (*str >= '0' && *str <= '9') {
@@ -33,6 +33,10 @@ static int number_conversor(const char *str, bool *err) {
 			return (0);
 		}
 		++str;
+	}
+	if ((result * signal) < -100 || result > 100) {
+		*err = true;
+		return (0);
 	}
 	return ((int)result * signal);
 }
@@ -73,6 +77,10 @@ int main(int argc, char **argv) {
 
 	// I check here if the use put a coordinate and you do not have enough values
 	int index = number_conversor(*(argv + 1), &err);
+	if (index < 1 || index > 100) {
+		write(2, "Invalid Index\n", 14);
+		return (-5);
+	}
 	if (((argc - 2) % index) != 0) {
 		write(2, "Missed value\n", 13);
 		return (-2);
@@ -94,7 +102,7 @@ int main(int argc, char **argv) {
 		err = false;
 		result += number_conversor(*argv, &err);
 		if (err) {
-			write(2, "MAX/MIN value Error\n", 20);
+			write(2, "Value Error\n", 12);
 			return (-4);
 		}
 		++argv;
