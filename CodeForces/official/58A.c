@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#define MAX_LEN 1000
+#define MAX_LEN 102
 
 /*
 	Author: Fernando Ruan
