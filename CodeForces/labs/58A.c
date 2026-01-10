@@ -18,12 +18,12 @@ static bool check_hello(char *str) {
 	int index = 0;
 
 	while (*str) {
-		if (index == 4)
-			return (true);
 		if (*str == target[index] || *str == target[index] - 32)
 			++index;
 		++str;
 	}
+	if (index == 5)
+		return (true);
 	return (false);
 }
 
