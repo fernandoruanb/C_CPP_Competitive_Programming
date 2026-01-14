@@ -81,15 +81,18 @@ static void isLuckyNumber(char *str) {
 }
 
 int main(void) {
-	char *input = (char *)malloc(sizeof(char *));
+	char *input = (char *)calloc(10, sizeof(char *));
 
 	if (!input) {
-	//	write(2, "Error\n", 6);
+		//write(2, "Error\n", 6);
 		return (0);
 	}
 	scanf("%s", input);
-	if (input[0] == '\0' || !areOnlyNumber(input))
+	if (input[0] == '\0' || !areOnlyNumber(input)) {
+		//write(2, "Error\n", 6);
+		free(input);
 		return (0);
+	}
 	isLuckyNumber(input);
 	free(input);
 	return (0);
