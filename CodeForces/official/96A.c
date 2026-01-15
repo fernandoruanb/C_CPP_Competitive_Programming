@@ -8,7 +8,7 @@
         Author: Fernando Ruan
         Profile: https://codeforces.com/profile/fruan-ba
         Country: Brazil
-        ChallengeLink: https://codeforces.com/problemset/problem/69/A
+        ChallengeLink: https://codeforces.com/problemset/problem/96/A
         I am happy to code :)
 */
 
