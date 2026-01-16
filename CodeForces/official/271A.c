@@ -139,8 +139,6 @@ static void findNextDistinctNumber(int n) {
 			free(target);
 			return ;
 		}
-		if (next == 3000)
-			break ;
 		++next;
 		free(target);
 	}
