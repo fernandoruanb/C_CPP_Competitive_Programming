@@ -153,6 +153,31 @@ static void insertInFrontTarget(t_num **list, t_num *new, int index) {
 	printf("Unfortunately, the index %d does not exist\n", index);
 }
 
+static void excludeAList(t_num **list, int target) {
+	if (!list || (!(*list)))
+		return ;
+
+	t_num *tmp = *list;
+	t_num *prev = NULL;
+
+	while (tmp) {
+		if (tmp->index == target) {
+			if (prev == NULL) {
+				*list = tmp->next;
+				free(tmp);
+			} else if (prev != NULL) {
+				prev->next = tmp->next;
+				free(tmp);
+			}
+			reorganizeIndexSystem(list);
+			return ;
+		}
+		prev = tmp;
+		tmp = tmp->next;
+	}
+	printf("The target index %d does not exist\n", target);
+}
+
 int main(void) {
 	int input;
 
@@ -160,8 +185,7 @@ int main(void) {
 	scanf("%d", &input);
 
 	if (!input || input < 0 || input > 1000) 
-		return (1);
-	
+		return (1);	
 
 	char direction;
 	int position, value;
@@ -198,6 +222,17 @@ int main(void) {
 	printAllValues(myNumberList);
 	puts("Printing in reverse order");
 	printReverseValues(myNumberList);
+	int target;
+
+	puts("Choose a index to erase it");
+	scanf("%d", &target);
+
+	if (!target || target < 0 || target > 10000) {
+		clearAllLists(&myNumberList);
+		return (1);
+	}
+	excludeAList(&myNumberList, target);
+	printAllValues(myNumberList); // to check the result
 	clearAllLists(&myNumberList);
 	return (0);
 }
