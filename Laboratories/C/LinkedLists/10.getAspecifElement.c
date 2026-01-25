@@ -153,12 +153,32 @@ static void insertInFrontTarget(t_num **list, t_num *new, int index) {
 	printf("Unfortunately, the index %d does not exist\n", index);
 }
 
+static t_num *getSpecifList(t_num *list, int target) { // the default is only in C++
+	if (!list)
+		return (NULL);
+	if (target <= 0)
+		target = 1;
+	t_num *tmp = list;
+	while (tmp && tmp->index != target)
+		tmp = tmp->next;
+	return (tmp);
+}
+
 static void excludeAList(t_num **list, int target) {
 	if (!list || (!(*list)))
 		return ;
 
 	t_num *tmp = *list;
 	t_num *prev = NULL;
+
+	/*
+		The idea here is simple. We need to find the target index to be exclude and
+		if that index is the first, we need to exclude it and the head of the list will become the
+		next element, tmp->next. Then, *list = tmp->next.
+
+		If the index is not the first element, we need to organize the pointers. then, prev->next = tmp->next
+		then, we can erase the target
+	*/
 
 	while (tmp) {
 		if (tmp->index == target) {
@@ -233,6 +253,15 @@ int main(void) {
 	}
 	excludeAList(&myNumberList, target);
 	printAllValues(myNumberList); // to check the result
+	puts("Choose a index to get more about it");
+	scanf("%d", &target);
+	if (!target || target < 0 || target > 10000) {
+		clearAllLists(&myNumberList);
+		return (1);
+	}
+	t_num *result = getSpecifList(myNumberList, target);
+	if (result)
+		printf("Index: %d\nNum: %d\n", result->index, result->num);
 	clearAllLists(&myNumberList);
 	return (0);
 }
