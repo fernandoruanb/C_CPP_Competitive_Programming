@@ -6,6 +6,8 @@ int main(void) {
 
 	std::string input; // correct way to represent null or putting "" in C++
 
+	// use {} instead of []
+
 	std::map<std::string, size_t> myMap = {
 		{"int", sizeof(int)},
 		{"char", sizeof(char)},
