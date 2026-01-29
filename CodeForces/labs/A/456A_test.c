@@ -9,7 +9,6 @@ typedef struct s_map {
 	struct s_map *next;
 } t_map;
 
-
 static t_map *createNewMap(void) {
 	t_map *new_map;
 
