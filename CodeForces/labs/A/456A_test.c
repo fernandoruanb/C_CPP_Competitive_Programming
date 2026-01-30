@@ -115,21 +115,11 @@ static void clearAllLaptops(t_map **map) {
 	}
 }
 
-static bool checkMatch(t_map *map, int *test) {
-	if (!map || !test)
+static bool checkMatch(t_map *one, t_map *two) {
+	if (!one || !two)
 		return (false);
-	t_map *tmp = map;
-	while (tmp) {
-		while (tmp && tmp->quality < test[1])
-			tmp = tmp->next;
-		if (!tmp)
-			return (false);
-		if (tmp->price < test[0] && tmp->quality >= test[1])
-			return (true);
-		if (tmp->price > test[0])
-			return (false);
-		tmp = tmp->next;
-	}
+	if (one->price < two->price && two->quality <= one->quality)
+		return (true);
 	return (false);
 }
 
@@ -140,7 +130,7 @@ int main(void) {
 
 	if (!input || input < 1 || input > 100000)
 		return (0);
-	int **test = (int **)calloc(input, sizeof(int *));
+	int **test = (int **)calloc(input + 1, sizeof(int *));
 	if (!test)
 		return (0);
 	for (int i = 0; i < input; ++i) {
@@ -193,8 +183,13 @@ int main(void) {
 		}
 	}
 	puts("Poor Alex");*/
+	t_map *check_one = mainMap;
+	t_map *check_two = check_one;
+
 	for (int i = 0; i < input; ++i) {
-		if (checkMatch(mainMap, test[i])) {
+		check_one = check_two;
+		check_two = check_one->next;
+		if (checkMatch(check_one, check_two)) {
 			puts("Happy Alex");
 			for (int i = 0; i < input; ++i)
 				free(test[i]);
