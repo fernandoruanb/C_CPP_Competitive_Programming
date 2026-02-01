@@ -2,7 +2,15 @@
 #include <vector>
 #include <climits>
 
-static bool is_primer(unsigned long long number) {
+/*
+        Author: Fernando Ruan
+        Profile: https://codeforces.com/profile/fruan-ba
+        Country: Brazil
+        ChallengeLink: https://codeforces.com/problemset/problem/1374/B
+        I am happy to code :)
+*/
+
+/*static bool is_primer(unsigned long long number) {
 	int starter = 2;
 	if (number < 2)
 		return (false);
@@ -12,15 +20,10 @@ static bool is_primer(unsigned long long number) {
 		++starter;
 	}
 	return (true);
-}
+}*/
 
 static int getResult(unsigned long long number) {
 	unsigned long long steps = 0;
-
-	if (number % 2 != 0 && number % 3 != 0)
-		return (-1);
-	else if (is_primer(number))
-		return (0);
 
 	while (number != 1) {
 		if (steps > INT_MAX)
@@ -29,15 +32,12 @@ static int getResult(unsigned long long number) {
 			number /= 6;
 			++steps;
 		}
-		else if (number % 2 == 0) {
+		else if (number % 3 == 0) {
 			number *= 2;
 			++steps;
 		}
 		else
 			return (-1);
-		if (number == 1)
-			return (steps);
-		std::cout << number << std::endl;
 	}
 	return (steps);
 }
@@ -50,7 +50,7 @@ int main(void) {
 
 	std::cin >> input;
 
-	if (!input || input < 1 || input > 1000)
+	if (!input || input < 1 || input > 20000)
 		return (0);
 
 	for (int i = 0; i < input; ++i) {
